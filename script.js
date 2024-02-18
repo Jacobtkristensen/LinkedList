@@ -126,23 +126,42 @@ class LinkedList {
             return;
         }
         const newNode = {
-            prev: existingNode.prev,
-            next: existingNode,
+            prev: null,
+            next: null,
             data: payload
         };
-        if(existingNode === this.head) {
-            this.head = newNode;
-        }
-
-        if (existingNode.prev) {
-            existingNode.prev.next = newNode;
-        } else {
-            this.head = newNode;
-        }
+        // if existing node is the first node, use addFirst method
+        if(this.head === existingNode) {
+            this.addFirst(payload);
+            return;
+        }  else {
+        newNode.prev = existingNode.prev;
+        newNode.next = existingNode;
+        existingNode.prev.next = newNode;
         existingNode.prev = newNode;
-        
-
-        
+        }
+    }
+    // insert node after a given node
+    insertAfterNode(existingNode, payload) {
+        if (!existingNode) {
+            console.log("Node not found");
+            return;
+        }
+        const newNode = {
+            prev: null,
+            next: null,
+            data: payload
+        };
+         // if existing node is the last node, use addLast method 
+        if (this.tail === existingNode) {
+            this.addLast(payload);
+            return;
+        } else { // if existing node is between two nodes 
+            newNode.prev = existingNode;
+            newNode.next = existingNode.next;
+            existingNode.next.prev = newNode;
+            existingNode.next = newNode;
+        }
     }
 
 }
@@ -202,23 +221,12 @@ console.log(11)
 
     // }
 
-    // removeFirst() {
-
-    // }
-
-    // removeLast() {
-
-    // }
-
+  
     // insertAfterNode(payload, existingNode) {
 
     // }
 
     // insertBeforeNode(payload, existingNode) {
-
-    // }
-
-    // removeNode(node) {
 
     // }
 
