@@ -32,11 +32,11 @@ node3.prev = node2;
 
 class LinkedList {
     constructor() {
-        this.head= node1
-        this.tail= node3
+        this.head = node1
+        this.tail = node3
     }
 
-     dumpList() {
+    dumpList() {
         let a_node = this.head;
         while (a_node != null) {
             console.log(`
@@ -48,7 +48,7 @@ class LinkedList {
             a_node = a_node.next;
         }
     }
-   // add node to the end of the list
+    // add node to the end of the list
     addLast(payload) {
         const newNode = {
             prev: this.tail,
@@ -90,7 +90,7 @@ class LinkedList {
             }
         }
     }
-    
+
     // remove node from the start of the list
     removeFirst() {
         if (this.head) {
@@ -107,10 +107,10 @@ class LinkedList {
 
     // remove node from the list
     removeNode(node) {
-        if (node === this.head){
+        if (node === this.head) {
             this.removeFirst();
         }
-        else if (node === this.tail){
+        else if (node === this.tail) {
             this.removeLast();
         }
         else {
@@ -131,14 +131,14 @@ class LinkedList {
             data: payload
         };
         // if existing node is the first node, use addFirst method
-        if(this.head === existingNode) {
+        if (this.head === existingNode) {
             this.addFirst(payload);
             return;
-        }  else {
-        newNode.prev = existingNode.prev;
-        newNode.next = existingNode;
-        existingNode.prev.next = newNode;
-        existingNode.prev = newNode;
+        } else {
+            newNode.prev = existingNode.prev;
+            newNode.next = existingNode;
+            existingNode.prev.next = newNode;
+            existingNode.prev = newNode;
         }
     }
     // insert node after a given node
@@ -152,7 +152,7 @@ class LinkedList {
             next: null,
             data: payload
         };
-         // if existing node is the last node, use addLast method 
+        // if existing node is the last node, use addLast method 
         if (this.tail === existingNode) {
             this.addLast(payload);
             return;
@@ -164,78 +164,84 @@ class LinkedList {
         }
     }
 
+    swapNodes(nodeA, nodeB){
+        let nodeACheck = false;
+        let nodeBCheck = false;
+        let currentNode = this.head;
+        while(currentNode){
+            if(currentNode === nodeA){
+                nodeACheck = true;
+            }
+            if(currentNode === nodeB){
+                nodeBCheck = true;
+            }
+            currentNode = currentNode.next;
+        }
+        if(nodeACheck && nodeBCheck){
+            const dataA = nodeA.data;
+            nodeA.data = nodeB.data;
+            nodeB.data = dataA;
+            return;
+        }
+        console.log("Couldn't find both nodes.")
+    }
+
+    // Find a node at a specific index
+    nodeAt(index) {
+        if (index < 0) {
+            console.log("Invalid index.");
+            return null;
+        }
+
+        let currentNode = this.head;
+        let currentIndex = 0;
+
+        while (currentNode !== null && currentIndex < index) {
+            currentNode = currentNode.next;
+            currentIndex++;
+        }
+
+        if (currentNode === null) {
+            console.log("Node not found at index: ", index);
+            return null;
+        }
+
+        return currentNode;
+    }
+    get(index){
+        if(!this.head){
+            return -1;
+        }
+        let currentNode = this.head;
+        let currentIndex = 0;
+        while(currentNode && currentIndex < index){
+            currentIndex++;
+            currentNode = currentNode.next;
+        }
+        if(currentNode){
+            return currentNode;
+        } else{
+            return "The node does not exist.";
+        }
+    }
+    first() {
+        if (!this.head) {
+            return console.log("Empty list")
+        }
+        console.log(this.head);
+    }
+    last() {
+        if (!this.head) {
+            return console.log("Empty list")
+        }
+        console.log(this.tail);
+    }
+    clear() {
+        this.head = null;
+        this.tail = null;
+        this.size = 0;
+      }
 }
 const ll = new LinkedList();
 console.log(11)
 
-// addLast(node) {
-
-//     node.prev = this.tail;
-//     this.tail.next = node;
-//     this.tail = node;
-
-
-// }
-
-// add(payload) {
-//     const newNode = {
-//         prev: null,
-//         next: null,
-//         data: payload
-//     };
-//     this.addLast(newNode);
-// }
-// addFirst(payload) {
-
-// }
-
-    // clear() {
-
-    // }
-
-    // get(index) {
-
-    // }
-
-    // indexOf(payload) {
-
-    // }
-
-    // insertAfter(index, payload) {
-
-    // }
-
-    // insertBefore(index, payload) {
-
-    // }
-
-    // first() {
-
-    // }
-
-    // last() {
-
-    // }
-
-    // remove(index) {
-
-    // }
-
-  
-    // insertAfterNode(payload, existingNode) {
-
-    // }
-
-    // insertBeforeNode(payload, existingNode) {
-
-    // }
-
-    // nodeAt(index) {
-
-    // }
-
-    // swapNodes(nodeA, nodeB) {
-
-    // }
-
-   
